@@ -1,3 +1,5 @@
+package BubbleSort;
+
 public class BubbleSort {
 
 
@@ -44,11 +46,14 @@ public class BubbleSort {
                    arr[j+1]=arr[j];
                    arr[j]=b;
                }
-
             }
             a++;
         }
     }
+
+
+
+
 
 
 }
