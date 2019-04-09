@@ -2,26 +2,65 @@
 
 public class MinHeap {
 
-    //基本照抄
-    //大概了解一下，之前对这个完全没听过
-    //网址:https://blog.csdn.net/szu_crayon/article/details/81812946
+    private int[] data;
 
-    int[]  Heap = new int[100005];
-    int Cur=0;
+    public MinHeap(int[] data) {
+        this.data = data;
+    }
 
-    void Insert(int val){
-        Heap[++Cur] = val;
-        int Temp_Cur = Cur;
-        while (Temp_Cur>1){
-            int Root = Temp_Cur/2;
-            if(Heap[Root]>val){
-                //swap(Heap[Root],Heap[Temp_Cur]);
-
-            }else
-                break;
-            Temp_Cur = Root;
+    public void createHeap(){
+        for (int i = (data.length)/2-1;i>=0;i--){
+            heapIfy(i);
         }
     }
 
+    public void heapIfy(int value){
+        int lchild = left(value);
+        int rchild = right(value);
+        int smallest = value;
+        if (lchild<data.length && data[lchild] < data[value])
+            smallest = lchild;
+        if(rchild<data.length && data[rchild]<data[smallest])
+            smallest=rchild;
+        if (value == smallest)
+            return;
+        swap(value,smallest);
+        heapIfy(smallest);
+    }
+
+    public int left(int value){
+        return ((value+1)<<1)-1;
+    }
+
+    public int right(int value){
+        return (value +1)<<1;
+    }
+
+    public void swap(int i ,int j){
+        int tmp = data[i];
+        data[i] = data[j];
+        data[j] = tmp;
+    }
+
+    public void setRoot(int value){
+        data[0] = value;
+        heapIfy(0);
+    }
+
+    public static void main(String[] args){
+        int[] value={10,100,12,73,45,32,11,23,55,34,90,21};
+        MinHeap heap = new MinHeap(value);
+        heap.createHeap();
+        for (int i=0;i<value.length;i++){
+            System.out.println(heap.data[i]+" ");
+    }
+        System.out.println();
+        heap.setRoot(64);
+        for(int i = 0;i<value.length;i++){
+            System.out.println(heap.data[i]+" ");
+
+        }
+        System.out.println();
+    }
 
 }
