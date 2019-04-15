@@ -17,7 +17,7 @@ public class MinHeap {
     public void heapIfy(int value){
         int lchild = left(value);
         int rchild = right(value);
-        int smallest = value;
+        int smallest = value;//0
         if (lchild<data.length && data[lchild] < data[value])
             smallest = lchild;
         if(rchild<data.length && data[rchild]<data[smallest])
@@ -30,11 +30,11 @@ public class MinHeap {
 
     public int left(int value){
         return ((value+1)<<1)-1;
-    }
+    }//1
 
     public int right(int value){
         return (value +1)<<1;
-    }
+    }//2
 
     public void swap(int i ,int j){
         int tmp = data[i];
