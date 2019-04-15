@@ -10,10 +10,16 @@ public class TestDemo {
     public void test1(){
       int[] a = {14,17,20,30,40,89};
       MinHeapCustom heapCustom = new MinHeapCustom(a);
-      int[] insert = heapCustom.insert(2);
-      for (int i : insert) {
+//      int[] insert = heapCustom.insert(2);
+//      for (int i : insert) {
+//          System.out.println(i);
+//      }
+  heapCustom.removeMin();
+      int[] heap = heapCustom.getHeap();
+      for (int i : heap) {
           System.out.println(i);
       }
+
   }
 
 
