@@ -31,29 +31,37 @@ public class Time2 {
         }
     }
 
-private static int a=0;//用来记录下面的线程
+    //当我实在是不知道这个死循环什么时候应该结束，什么时候应该等着的时候，看了下源码，
+    // 这种精妙的思想我感觉我吸收了一些O(∩_∩)O，所以定义了这个变量，不过虽然我看懂了这里，
+    // 但目前我做的只有执行，没有循环，所以目前还用不了这个方法，我先自己想办法实现负的逻辑，
+    //后期再继续优化，改方法
+private static boolean newTasksMayBeScheduled=true;
 
     private static void listenThread(){
          new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true){
-                    //如果队列中有一个元素，那么当执行完移除后会自动break，这样后来再添加队列里还是相当于一个元素，
-                    // 所以我定义一个变量，每次移除后不着急break，循环多次，变量达到一定程度后才break
-                    if (queue.length==0){
 
-                        System.out.println("队伍中没有任务了");
-                        if (a >= 100){
-                            break;
+                    try {
+                        //如果队列为空，把锁换回去，进入无线等待状态
+                        synchronized (queue){
+                            if (queue.length==0 &&newTasksMayBeScheduled ==true){
+                                queue.wait();
+                            }
+                             if (queue.length==0){
+                                 break;
+                             }
+                            queue[0].getTime1().run();
+                            NewMinHeapCustom.removeMin(queue);
+                            if (queue.length!=0){
+                                newTasksMayBeScheduled = false;
+                            }
+
                         }
-                        a++;
-                        notify();
-
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-
-
-
-
 
                 }
             }
