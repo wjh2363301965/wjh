@@ -18,9 +18,9 @@ public class NewMinHeapCustom {
         int indexFather = (indexSon - 1) / 2;
 
         if (heap[indexSon].getTimeindex() <= heap[indexFather].getTimeindex()) {
-            int temp = heap[indexSon].getTimeindex();
-            heap[indexSon].setTimeindex(heap[indexFather].getTimeindex()); //相当于heap[indexSon] = heap[indexFather];
-            heap[indexFather].setTimeindex(temp);
+            TimeQueue temp = heap[indexSon];
+             heap[indexSon] = heap[indexFather];
+            heap[indexFather]=temp;
         } else {
             return;
         }
@@ -31,33 +31,33 @@ public class NewMinHeapCustom {
         insertSort(heap, indexFather);
     }
 
-   /*  public static int removeMin() {
+     public static void removeMin(TimeQueue[] heap) {
 
-        int temp = heap[heap.length-1];
-        int removeNum = heap[0];
+        TimeQueue temp = heap[heap.length-1];
+
         heap[0] = temp;
         //又学会个新方法O(∩_∩)O
-        int[] newHeap = Arrays.copyOfRange(heap, 0, heap.length - 1);
+        TimeQueue[] newHeap = Arrays.copyOfRange(heap, 0, heap.length - 1);
         heap = newHeap;
         if (heap.length>1)
             removeSort(heap,0);
 
-        return removeNum;
+
     }
 
-    private static void removeSort(int[] heap,int indexFather) {
+    private static void removeSort(TimeQueue[] heap,int indexFather) {
         int leftSon = indexFather*2+1;
         //下面这一个判断语句我想了好久
         if (indexFather<heap.length && heap.length-1<leftSon){
             return;
         }
-        if (heap[indexFather]>=heap[leftSon]){
-            int temp = heap[indexFather];
+        if (heap[indexFather].getTimeindex()>=heap[leftSon].getTimeindex()){
+            TimeQueue temp = heap[indexFather];
             heap[indexFather] = heap[leftSon];
             heap[leftSon] = temp;
         }
 
         removeSort(heap,leftSon);
 
-    }*/
+    }
 }

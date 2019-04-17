@@ -3,6 +3,7 @@ package com.wjh.day04_11.timing;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
@@ -72,12 +73,11 @@ public class TestTiming {
     @Test
     public void test4() {
 
-        ArrayList<Integer> arr = new ArrayList();
-        arr.add(5);
-        arr.add(3);
-        arr.add(7);
-        for (Integer o : arr) {
-            System.out.println(o);
+       int[] arr = {3,4,5,6};
+
+        int[] ints = Arrays.copyOfRange(arr, 1,arr.length);
+        for (int anInt : ints) {
+            System.out.println(anInt);
         }
 
     }

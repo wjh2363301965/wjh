@@ -54,12 +54,17 @@ public class TestDemo {
           }
       };
       Time2.schedule(time1,1000,0);
-      System.out.println("====");
       Time2.schedule(time2,500,0);
-      System.out.println("=====");
       Time2.schedule(time3,250,0);
 
 
 
   }
+
+
+  @Test
+    public void test5(){
+
+  }
+
 }
